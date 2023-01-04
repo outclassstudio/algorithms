@@ -22,16 +22,17 @@ console.log(getCombinations([1,2,3,4], 3))
 //* 순서 고려하여 뽑기
 const getPermutations = (array, selectNumber) => {
   const results = []
-  if(selectNumber === 1) return el => [el]
+  if(selectNumber === 1) return array.map(el => [el])
 
   array.forEach((fixed, index, origin) => {
     const rest = [...origin.slice(0, index), ...origin.slice(index+1)]
     const permutations = getPermutations(rest, selectNumber - 1)
     const attached = permutations.map((el) => [fixed, ...el])
-    results.push(attached)
+    results.push(...attached)
   })
 
   return results
 }
+
 
 console.log(getPermutations([1,2,3],2))
